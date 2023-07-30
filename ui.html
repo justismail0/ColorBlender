@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ColorBlendr Figma Plugin</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            padding: 12px;
+            overflow-x: hidden;
+            font-size: 14px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+
+        select {
+            width: 200px;
+            height: 32px;
+            border-radius: 4px;
+            border: 1px solid #cccccc;
+            padding: 0 1px;
+            font-size: 14px;
+            transition: border 0.3s;
+        }
+
+        select:focus, select:hover {
+            border: 1px solid #cccccc;
+            outline: none;
+        }
+
+        .form-group label {
+            width: 150px;
+            margin-right: 16px;
+        }
+
+        
+
+
+      
+        input[type="text"],
+        input[type="number"] {
+            padding: 8px;
+            border: 1px solid #d4d4d4;
+            border-radius: 4px;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            width: 200px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            width: 200px;
+        }
+
+        input[type="color"] {
+            padding: 0;
+            border: 1px solid #d4d4d4;
+            border-radius: 4px;
+            background-color: #ffffff;
+            width: 32px;
+            margin: 0;
+            height: 32px;
+        }
+
+        .input-group input[type="text"] {
+            width: auto;
+            flex-grow: 1;
+        }
+
+        .radio-group {
+            display: inline-block;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .radio-group label {
+            width: 150px;
+            margin-right: 16px;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 24px;
+        }
+
+        .button-group button {
+            padding: 8px 16px;
+            margin-left: 16px;
+            font-weight: 500;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-group button.primary {
+            background-color: #007aff;
+            color: #ffffff;
+        }
+
+        .button-group button.secondary {
+            background-color: transparent;
+            color: #007aff;
+            border: 1px solid #007aff;
+        }
+
+        .button-group button.secondary:hover {
+            background-color: #eaeef0;
+        }
+       
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                 'opsz' 48
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Generate tints</h1>
+
+    <div class="form-group">
+        <label for="colorPicker">Color:</label>
+        <div class="input-group">
+            <input type="color" id="colorPicker" value="#007aff">
+            <input type="text" id="hexColorInput" value="#007aff" placeholder="#ffffff" pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$">
+        </div>
+    </div>
+    
+
+    <div class="form-group">
+        <label for="nameInput">Color Name:</label>
+        <input type="text" id="nameInput" placeholder="Primary">
+    </div>
+
+    <div class="form-group">
+        <label for="numTintsInput">Number of Tints:</label>
+        <select id="numTintsInput" class="ds-input">
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10" selected>10</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Layout Direction:</label>
+        <div class="radio-group">
+            <label>
+                <input type="radio" name="layoutDirection" value="HORIZONTAL" checked>
+                Horizontal
+            </label>
+            <label>
+                <input type="radio" name="layoutDirection" value="VERTICAL">
+                Vertical
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m388-80-20-126q-19-7-40-19t-37-25l-118 54-93-164 108-79q-2-9-2.5-20.5T185-480q0-9 .5-20.5T188-521L80-600l93-164 118 54q16-13 37-25t40-18l20-127h184l20 126q19 7 40.5 18.5T669-710l118-54 93 164-108 77q2 10 2.5 21.5t.5 21.5q0 10-.5 21t-2.5 21l108 78-93 164-118-54q-16 13-36.5 25.5T592-206L572-80H388Zm92-270q54 0 92-38t38-92q0-54-38-92t-92-38q-54 0-92 38t-38 92q0 54 38 92t92 38Zm0-60q-29 0-49.5-20.5T410-480q0-29 20.5-49.5T480-550q29 0 49.5 20.5T550-480q0 29-20.5 49.5T480-410Zm0-70Zm-44 340h88l14-112q33-8 62.5-25t53.5-41l106 46 40-72-94-69q4-17 6.5-33.5T715-480q0-17-2-33.5t-7-33.5l94-69-40-72-106 46q-23-26-52-43.5T538-708l-14-112h-88l-14 112q-34 7-63.5 24T306-642l-106-46-40 72 94 69q-4 17-6.5 33.5T245-480q0 17 2.5 33.5T254-413l-94 69 40 72 106-46q24 24 53.5 41t62.5 25l14 112Z"/></svg> -->
+        <label for="ellipseSizeInput">Elipse Size:</label>
+        <input type="number" id="ellipseSizeInput" min="50" max="200" step="10" value="120">
+    </div>
+
+    <div class="form-group">
+        <label for="itemSpacingInput">Item Spacing:</label>
+        <input type="number" id="itemSpacingInput" min="0" max="100" step="8" value="32">
+    </div>
+
+    <div class="button-group">
+        <button id="cancelButton" class="secondary">Cancel</button>
+        <button id="createButton" class="primary">Create Tints</button>
+    </div>
+
+    <script>
+
+        const colorPicker = document.getElementById('colorPicker');
+        const hexColorInput = document.getElementById('hexColorInput');
+
+        colorPicker.addEventListener('input', () => {
+            hexColorInput.value = colorPicker.value;
+        });
+
+        hexColorInput.addEventListener('input', () => {
+            if (hexColorInput.validity.valid) {
+                colorPicker.value = hexColorInput.value;
+            }
+        });
+
+        
+
+
+        document.getElementById('cancelButton').addEventListener('click', () => {
+            parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*');
+        });
+
+        document.getElementById('createButton').addEventListener('click', () => {
+            const color = colorPicker.value;
+            const name = document.getElementById('nameInput').value;
+            const numTints = parseInt(document.getElementById('numTintsInput').value);
+            const ellipseSize = parseInt(document.getElementById('ellipseSizeInput').value, 10);
+            const layoutDirection = document.querySelector('input[name="layoutDirection"]:checked').value;
+            const itemSpacing = parseInt(document.getElementById('itemSpacingInput').value, 10);
+
+            parent.postMessage({
+                pluginMessage: {
+                    type: 'create-tints',
+                    color,
+                    name,
+                    numTints,
+                    ellipseSize,
+                    layoutDirection,
+                    itemSpacing
+                }
+            }, '*');
+        });
+    </script>
+</body>
+</html>
