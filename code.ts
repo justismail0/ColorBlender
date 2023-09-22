@@ -11,7 +11,7 @@ interface UIPluginMessage {
 }
 
 figma.showUI(__html__);
-figma.ui.resize(400,410);
+figma.ui.resize(240,410);
 
 figma.ui.onmessage = async (msg: UIPluginMessage) => {
   if (msg.type === 'cancel') {
