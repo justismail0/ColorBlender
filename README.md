@@ -3,9 +3,6 @@ ColorBlender allows designers to effortlessly generate a variety of color tints 
 As a designer with little backend coding knowledge, I created this useful Figma plugin by leveraging the power of chatGPT.
 
 
-
-
-
 Below are the steps to get your plugin running. You can also find instructions at:
 
   - https://www.figma.com/plugin-docs/plugin-quickstart-guide/
