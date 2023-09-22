@@ -1,13 +1,21 @@
+ColorBlender allows designers to effortlessly generate a variety of color tints based on a selected color. With customizable options for tint count, ellipse size, layout direction, and item spacing, this plugin empowers you to quickly explore and experiment with different color variations. Enhance your design workflow by creating stunning tints in just a few clicks.
+
+As a designer with little backend coding knowledge, I created this useful Figma plugin by leveraging the power of chatGPT.
+
+
+
+
+
 Below are the steps to get your plugin running. You can also find instructions at:
 
-  https://www.figma.com/plugin-docs/plugin-quickstart-guide/
+  - https://www.figma.com/plugin-docs/plugin-quickstart-guide/
 
 This plugin template uses Typescript and NPM, two standard tools in creating JavaScript applications.
 
 First, download Node.js which comes with NPM. This will allow you to install TypeScript and other
 libraries. You can find the download link here:
 
-  https://nodejs.org/en/download/
+  - https://nodejs.org/en/download/
 
 Next, install TypeScript using the command:
 
