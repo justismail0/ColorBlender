@@ -7,11 +7,10 @@ interface UIPluginMessage {
   ellipseSize?: number;
   layoutDirection?: "HORIZONTAL" | "VERTICAL";
   itemSpacing?: number;
-  
 }
 
 figma.showUI(__html__);
-figma.ui.resize(240,410);
+figma.ui.resize(340,448);
 
 figma.ui.onmessage = async (msg: UIPluginMessage) => {
   if (msg.type === 'cancel') {

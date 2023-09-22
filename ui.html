@@ -6,49 +6,58 @@
     <title>ColorBlendr Figma Plugin</title>
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'inter', sans-serif;
             background-color: #ffffff;
-            padding: 12px;
+            padding: 8px;
             overflow-x: hidden;
-            font-size: 14px;
+            font-size: 13px;
+            font-weight: normal;
         }
 
-        h1 {
-            font-size: 24px;
-            margin-bottom: 16px;
-        }
-
+        /* Global Form style */
+    
         .form-group {
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            align-items: flex-start;
             margin-bottom: 16px;
+            width: 100%;
         }
-        
 
+        .form-group label.mainlabel {
+            margin-right: 16px;
+            margin-bottom: 8px;
+            color: dimgray;
+        }
+
+        /* Dropdown selection */
+    
         select {
-            width: 200px;
+            width: 100%;
             height: 32px;
             border-radius: 4px;
             border: 1px solid #cccccc;
-            padding: 0 1px;
             font-size: 14px;
             transition: border 0.3s;
+            padding-left: 8px;
+            position: relative;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAUCAMAAACtdX32AAAAdVBMVEUAAAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhMdQaAAAAJ3RSTlMAAAECAwQGBwsOFBwkJTg5RUZ4eYCHkJefpaytrsXGy8zW3+Do8vNn0bsyAAAAYElEQVR42tXROwJDQAAA0Ymw1p9kiT+L5P5HVEi3qJn2lcPjtIuzUIJ/rhIGy762N3XaThqMN1ZPALsZPEzG1x8LrFL77DHBnEMxBewz0fJ6LyFHTPL7xhwzWYrJ9z22AqmQBV757MHfAAAAAElFTkSuQmCC);
+            background-position: 100%;
+            background-repeat: no-repeat;
+            background-size: 22px 14px;
+            -webkit-appearance: none !important;
+            -moz-appearance: none !important;
         }
 
+    
         select:focus, select:hover {
             border: 1px solid #cccccc;
             outline: none;
         }
 
-        .form-group label {
-            width: 150px;
-            margin-right: 16px;
-        }
 
-        
-
-
-      
+        /* Text and color input */
+    
         input[type="text"],
         input[type="number"] {
             padding: 8px;
@@ -56,102 +65,218 @@
             border-radius: 4px;
             background-color: #ffffff;
             color: #1a1a1a;
-            width: 200px;
+            width: 100%;
         }
-
+    
         .input-group {
             display: flex;
             align-items: center;
             gap: 4px;
-            width: 200px;
+            width: 100%;
         }
-
-        input[type="color"] {
-            padding: 0;
-            border: 1px solid #d4d4d4;
-            border-radius: 4px;
-            background-color: #ffffff;
-            width: 32px;
-            margin: 0;
-            height: 32px;
-        }
-
+    
         .input-group input[type="text"] {
             width: auto;
             flex-grow: 1;
         }
+    
+
+        /* Radio selection style */
 
         .radio-group {
-            display: inline-block;
-            align-items: center;
-            font-size: 13px;
+            width: 100%;
+            display: flex;
+
         }
 
-        .radio-group label {
-            width: 150px;
-            margin-right: 16px;
+        .radio-group {
+            flex-wrap: wrap;
+            width: 100%;
+            justify-content: space-between;
+            height: 32px;
         }
+
+        .radio-group label.radio-card {
+            width: calc(50% - 7px);
+            margin: 0;
+            padding: 0;
+            height: 32px;
+
+        }
+
+        .radio-group .radio-card span {
+            display: flex;
+            align-items: center;
+            border: 1px solid #cccccc;
+            padding: 0px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            margin: 0;
+            font-size: 13px;
+            height: 32px;
+        }
+
+        .radio-card span:hover {
+            border-color: #027BEB;
+        }
+
+        .radio-card input[type='radio'] {
+            display: none;
+        }
+
+        .radio-card input[type='radio']:checked + span {
+            color: #027BEB;
+            width: 100%;
+            background-color: rgba(0,123,255, 0.1);
+            border-color: #027BEB;
+        }
+
+        .radio-card input[type='radio']:checked ~ svg path {
+            fill: #027BEB;
+        }
+
+        .radio-card input[type='radio']:checked ~ svg {
+            color: #027BEB;
+        }
+
+        .radio-card input[type='radio']:checked {
+            background-color: rgba(0,123,255, 0.1);
+            border-color: #027BEB;
+        }
+
+       
+        .radio-card svg {
+            margin-right: 4px;
+            margin-left: 8px;
+        }
+
+        .radio-card svg {
+            vertical-align: middle;
+            fill: currentColor;
+        }
+
+        /* Button style */
 
         .button-group {
-            display: flex;
-            justify-content: flex-end;
+            display: block;
             margin-top: 24px;
         }
-
+    
         .button-group button {
-            padding: 8px 16px;
-            margin-left: 16px;
+            padding: 12px 16px;
+            margin-left: 0;
             font-weight: 500;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            width: 100%;
+            font-size: 14px;
         }
-
+    
         .button-group button.primary {
             background-color: #007aff;
             color: #ffffff;
+    
         }
-
+    
         .button-group button.secondary {
             background-color: transparent;
             color: #007aff;
             border: 1px solid #007aff;
+            display:  none;
         }
-
+    
         .button-group button.secondary:hover {
             background-color: #eaeef0;
         }
-       
-        .material-symbols-outlined {
-            font-variation-settings:
-                'FILL' 0,
-                'wght' 400,
-                'GRAD' 0,
-                 'opsz' 48
+
+        /* 2 columns inputs */
+    
+        .tints-view {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            justify-content: space-between;
+        }
+    
+        .tints-view .form-group {
+            width: calc(50% - 5px);
+            margin: 0;
         }
 
+        /* Color picker */
+
+        .input-group.colorPickerG {
+            padding: 0;
+            margin: 0;
+            border: 1px solid #d4d4d4;
+            border-radius: 4px;
+        }
+
+        .input-group.colorPickerG input {
+            padding: 8px;
+            border: 0;
+            border-radius: 4px;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            -webkit-border-top-left-radius: 4px;
+            -webkit-border-bottom-left-radius: 4px;
+            -moz-border-radius-topleft: 4px;
+            -moz-border-radius-bottomleft: 4px;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .input-group.colorPickerG input[type="color"] {
+            padding: 0;
+            border: 0;
+            border-radius: 4px;
+            background-color: #ffffff;
+            width: 48px;
+            margin: 0;
+            height: 32px;
+            margin-right: 2px;
+            border: none;
+            cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: transparent;
+        }
+
+  
+        .input-group.colorPickerG input[type="color"]::-webkit-color-swatch {
+            border-radius: 2px;
+            border: 0;
+        }
+        .input-group.colorPickerG input[type="color"]::-moz-color-swatch {
+            border-radius: 2px;
+            border: 0;
+        }
+    
     </style>
+    
 </head>
 <body>
-    <h1>Generate tints</h1>
-
     <div class="form-group">
-        <label for="colorPicker">Color:</label>
-        <div class="input-group">
-            <input type="color" id="colorPicker" value="#007aff">
-            <input type="text" id="hexColorInput" value="#007aff" placeholder="#ffffff" pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$">
+        <label for="colorPicker" class="mainlabel">Base color:</label>
+        <div class="input-group colorPickerG">
+            <input type="text" id="hexColorInput" value="#7B61FF" placeholder="#ffffff" pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$">
+            <input type="color" id="colorPicker" value="#7B61FF">
         </div>
     </div>
     
 
     <div class="form-group">
-        <label for="nameInput">Color Name:</label>
+        <label for="nameInput" class="mainlabel">Color name:</label>
         <input type="text" id="nameInput" placeholder="Primary">
     </div>
 
     <div class="form-group">
-        <label for="numTintsInput">Number of Tints:</label>
+        <label for="numTintsInput" class="mainlabel">Number of tints:</label>
         <select id="numTintsInput" class="ds-input">
             <option value="3">3</option>
             <option value="4">4</option>
@@ -165,33 +290,43 @@
     </div>
 
     <div class="form-group">
-        <label>Layout Direction:</label>
+        <label class="mainlabel">Layout direction:</label>
         <div class="radio-group">
-            <label>
+            <label class="radio-card">
                 <input type="radio" name="layoutDirection" value="HORIZONTAL" checked>
-                Horizontal
+                <span>                
+                    <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="18"><path d="M207.858-432Q188-432 174-446.142q-14-14.141-14-34Q160-500 174.142-514q14.141-14 34-14Q228-528 242-513.858q14 14.141 14 34Q256-460 241.858-446q-14.141 14-34 14Zm272 0Q460-432 446-446.142q-14-14.141-14-34Q432-500 446.142-514q14.141-14 34-14Q500-528 514-513.858q14 14.141 14 34Q528-460 513.858-446q-14.141 14-34 14Zm272 0Q732-432 718-446.142q-14-14.141-14-34Q704-500 718.142-514q14.141-14 34-14Q772-528 786-513.858q14 14.141 14 34Q800-460 785.858-446q-14.141 14-34 14Z"/></svg>                     
+                    Horizontal
+                </span>
             </label>
-            <label>
+            <label class="radio-card">
                 <input type="radio" name="layoutDirection" value="VERTICAL">
-                Vertical
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="18"><path d="M479.858-160Q460-160 446-174.142q-14-14.141-14-34Q432-228 446.142-242q14.141-14 34-14Q500-256 514-241.858q14 14.141 14 34Q528-188 513.858-174q-14.141 14-34 14Zm0-272Q460-432 446-446.142q-14-14.141-14-34Q432-500 446.142-514q14.141-14 34-14Q500-528 514-513.858q14 14.141 14 34Q528-460 513.858-446q-14.141 14-34 14Zm0-272Q460-704 446-718.142q-14-14.141-14-34Q432-772 446.142-786q14.141-14 34-14Q500-800 514-785.858q14 14.141 14 34Q528-732 513.858-718q-14.141 14-34 14Z"/></svg>                   
+                    Vertical
+                </span>
             </label>
         </div>
     </div>
 
-    <div class="form-group">
-        <!-- <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m388-80-20-126q-19-7-40-19t-37-25l-118 54-93-164 108-79q-2-9-2.5-20.5T185-480q0-9 .5-20.5T188-521L80-600l93-164 118 54q16-13 37-25t40-18l20-127h184l20 126q19 7 40.5 18.5T669-710l118-54 93 164-108 77q2 10 2.5 21.5t.5 21.5q0 10-.5 21t-2.5 21l108 78-93 164-118-54q-16 13-36.5 25.5T592-206L572-80H388Zm92-270q54 0 92-38t38-92q0-54-38-92t-92-38q-54 0-92 38t-38 92q0 54 38 92t92 38Zm0-60q-29 0-49.5-20.5T410-480q0-29 20.5-49.5T480-550q29 0 49.5 20.5T550-480q0 29-20.5 49.5T480-410Zm0-70Zm-44 340h88l14-112q33-8 62.5-25t53.5-41l106 46 40-72-94-69q4-17 6.5-33.5T715-480q0-17-2-33.5t-7-33.5l94-69-40-72-106 46q-23-26-52-43.5T538-708l-14-112h-88l-14 112q-34 7-63.5 24T306-642l-106-46-40 72 94 69q-4 17-6.5 33.5T245-480q0 17 2.5 33.5T254-413l-94 69 40 72 106-46q24 24 53.5 41t62.5 25l14 112Z"/></svg> -->
-        <label for="ellipseSizeInput">Elipse Size:</label>
-        <input type="number" id="ellipseSizeInput" min="50" max="200" step="10" value="120">
+    
+
+    <div class="tints-view">
+        <div class="form-group">
+            <label for="ellipseSizeInput" class="mainlabel">Item size:</label>
+            <input type="number" id="ellipseSizeInput" min="50" max="200" step="10" value="120">
+        </div>
+        <div class="form-group">
+            <label for="itemSpacingInput" class="mainlabel">Item spacing:</label>
+            <input type="number" id="itemSpacingInput" min="0" max="100" step="8" value="32" placeholder="32">
+        </div>
     </div>
 
-    <div class="form-group">
-        <label for="itemSpacingInput">Item Spacing:</label>
-        <input type="number" id="itemSpacingInput" min="0" max="100" step="8" value="32">
-    </div>
+    
 
     <div class="button-group">
         <button id="cancelButton" class="secondary">Cancel</button>
-        <button id="createButton" class="primary">Create Tints</button>
+        <button id="createButton" class="primary">Generate Tints</button>
     </div>
 
     <script>
