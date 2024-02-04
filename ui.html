@@ -4,16 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ColorBlendr Figma Plugin</title>
-    <style>
+    <style id="figma-style">
+        
+        .figma-light body {
+            background-color: white;
+            color: #000000;
+        }
+
+        .figma-dark body {
+            background-color: #161B26;
+            color: #CECFD2;
+        }
+
         body {
             font-family: 'inter', sans-serif;
-            background-color: #ffffff;
+            background-color: var(--figma-color-bg);
+            color: var(--figma-color-text);
             padding: 8px;
             overflow-x: hidden;
             font-size: 13px;
             font-weight: normal;
         }
 
+       
+        
         /* Global Form style */
     
         .form-group {
@@ -24,18 +38,24 @@
             width: 100%;
         }
 
-        .form-group label.mainlabel {
+        .figma-light .form-group label.mainlabel {
             margin-right: 16px;
             margin-bottom: 8px;
-            color: dimgray;
+            color: #344054;
+        }
+
+        .figma-dark .form-group label.mainlabel {
+            margin-right: 16px;
+            margin-bottom: 8px;
+            color: #CECFD2;
         }
 
         /* Dropdown selection */
     
         select {
             width: 100%;
-            height: 32px;
-            border-radius: 4px;
+            height: 34px;
+            border-radius: 6px;
             border: 1px solid #cccccc;
             font-size: 14px;
             transition: border 0.3s;
@@ -46,6 +66,20 @@
             background-repeat: no-repeat;
             background-size: 22px 14px;
             -webkit-appearance: none !important;
+        }
+
+        .figma-light select {
+            border: 1px solid #D0D5DD;
+            background-color: #FFFFFF;
+            color: #667085;
+            box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+        }
+
+        .figma-dark select {
+            border: 1px solid #333741;
+            background-color: #1F242F;
+            color: #85888E;
+            box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
         }
 
     
@@ -61,7 +95,8 @@
         input[type="number"] {
             padding: 8px;
             border: 1px solid #d4d4d4;
-            border-radius: 4px;
+            height: 34px;
+            border-radius: 6px;
             background-color: #ffffff;
             color: #1a1a1a;
             width: 100%;
@@ -92,14 +127,16 @@
             flex-wrap: wrap;
             width: 100%;
             justify-content: space-between;
-            height: 32px;
+            height: 34px;
+            border-radius: 6px;
         }
 
         .radio-group label.radio-card {
             width: calc(50% - 7px);
             margin: 0;
             padding: 0;
-            height: 32px;
+            height: 34px;
+            border-radius: 6px;
 
         }
 
@@ -114,7 +151,8 @@
             width: 100%;
             margin: 0;
             font-size: 13px;
-            height: 32px;
+            height: 34px;
+            border-radius: 6px;
         }
 
         .radio-card span:hover {
@@ -168,7 +206,7 @@
             margin-left: 0;
             font-weight: 500;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             transition: background-color 0.3s ease;
             width: 100%;
@@ -261,7 +299,7 @@
 </head>
 <body>
     <div class="form-group">
-        <label for="colorPicker" class="mainlabel">Base color:</label>
+        <label for="colorPicker" class="mainlabel">Base color</label>
         <div class="input-group colorPickerG">
             <input type="text" id="hexColorInput" value="#7B61FF" placeholder="#ffffff" pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$">
             <input type="color" id="colorPicker" value="#7B61FF">
@@ -270,12 +308,12 @@
     
 
     <div class="form-group">
-        <label for="nameInput" class="mainlabel">Color name:</label>
+        <label for="nameInput" class="mainlabel">Color name</label>
         <input type="text" id="nameInput" placeholder="Primary">
     </div>
 
     <div class="form-group">
-        <label for="numTintsInput" class="mainlabel">Number of tints:</label>
+        <label for="numTintsInput" class="mainlabel">Number of tints</label>
         <select id="numTintsInput" class="ds-input">
             <option value="3">3</option>
             <option value="4">4</option>
@@ -289,7 +327,7 @@
     </div>
 
     <div class="form-group">
-        <label class="mainlabel">Layout direction:</label>
+        <label class="mainlabel">Layout direction</label>
         <div class="radio-group">
             <label class="radio-card">
                 <input type="radio" name="layoutDirection" value="HORIZONTAL" checked>
@@ -312,11 +350,11 @@
 
     <div class="tints-view">
         <div class="form-group">
-            <label for="ellipseSizeInput" class="mainlabel">Item size:</label>
+            <label for="ellipseSizeInput" class="mainlabel">Item size</label>
             <input type="number" id="ellipseSizeInput" min="50" max="200" step="10" value="120">
         </div>
         <div class="form-group">
-            <label for="itemSpacingInput" class="mainlabel">Item spacing:</label>
+            <label for="itemSpacingInput" class="mainlabel">Item spacing</label>
             <input type="number" id="itemSpacingInput" min="0" max="100" step="8" value="32" placeholder="32">
         </div>
     </div>

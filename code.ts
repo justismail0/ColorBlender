@@ -9,9 +9,8 @@ interface UIPluginMessage {
   itemSpacing?: number;
 }
 
-figma.showUI(__html__);
-figma.ui.resize(340,448);
-
+figma.showUI(__html__, { themeColors: true});
+figma.ui.resize(340,454);
 figma.ui.onmessage = async (msg: UIPluginMessage) => {
   if (msg.type === 'cancel') {
       figma.closePlugin();
